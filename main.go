@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"os/signal"
@@ -26,12 +25,6 @@ var (
 	password = os.Getenv("PGPASSWORD")
 	dbname   = os.Getenv("PGDATABASE")
 )
-
-func init() {
-
-	flag.StringVar(&Token, "t", "", "Bot Token")
-	flag.Parse()
-}
 
 func main() {
 	// Establish database connection
