@@ -7,12 +7,24 @@ import (
 	"os/signal"
 	"syscall"
 
+	"database/sql"
+
 	"github.com/bwmarrin/discordgo"
+	_ "github.com/lib/pq"
 )
 
 // Variables used for command line parameters
 var (
 	Token string
+)
+
+// Setup database variables
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "postgres"
+	password = "your-password"
+	dbname   = "janus"
 )
 
 func init() {
@@ -22,6 +34,13 @@ func init() {
 }
 
 func main() {
+	// Establish database connection
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlInfo)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + Token)
