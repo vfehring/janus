@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"vfehring/janus/events"
 
 	"database/sql"
 
@@ -45,7 +46,8 @@ func main() {
 		return
 	}
 
-	// Register the messageCreate func as a callback for MessageCreate events.
+	// Register the Discord events
+	dg.AddHandler(events.Ready)
 	dg.AddHandler(messageCreate)
 
 	// In this example, we only care about receiving message events.
