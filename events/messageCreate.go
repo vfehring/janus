@@ -23,12 +23,12 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// 	return
 	// }
 
-	// If the message is "ping" reply with "Pong!"
+	// If the command is "ping" reply with "Pong!"
 	if args[0] == prefix+"ping" {
 		s.ChannelMessageSend(m.ChannelID, "Pong!")
 	}
 
-	// If the message is "pong" reply with "Ping!"
+	// If the command is "pong" reply with "Ping!"
 	if args[0] == prefix+"pong" {
 		s.ChannelMessageSend(m.ChannelID, "Ping!")
 	}
