@@ -48,6 +48,7 @@ func main() {
 
 	// Register the Discord events
 	dg.AddHandler(events.Ready)
+	dg.AddHandler(events.MemberJoin)
 	dg.AddHandler(events.MessageCreate)
 
 	// In this example, we only care about receiving message events.
