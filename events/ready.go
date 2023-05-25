@@ -1,12 +1,12 @@
 package events
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func Ready(session *discordgo.Session, event *discordgo.Ready) {
 	session.UpdateListeningStatus("keep Discord safe")
-	fmt.Println(session.State.User.Username, "is Online")
+	log.Println("Logged in and ready to serve", len(session.State.Guilds), "servers")
 }

@@ -1,8 +1,12 @@
 package events
 
 import (
+	"strings"
+
 	"github.com/bwmarrin/discordgo"
 )
+
+const prefix string = "."
 
 // This function will be called (due to AddHandler above) every time a new
 // message is created on any channel that the authenticated bot has access to.
@@ -13,13 +17,19 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
+
+	args := strings.Split(m.Content, " ")
+	// if args[0] != prefix {
+	// 	return
+	// }
+
 	// If the message is "ping" reply with "Pong!"
-	if m.Content == "ping" {
+	if args[0] == prefix+"ping" {
 		s.ChannelMessageSend(m.ChannelID, "Pong!")
 	}
 
 	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
+	if args[0] == prefix+"pong" {
 		s.ChannelMessageSend(m.ChannelID, "Ping!")
 	}
 }
