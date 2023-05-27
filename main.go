@@ -13,11 +13,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// Variables used for command line parameters
-var (
-	Token string
-)
-
 // Setup database variables
 var (
 	host     = os.Getenv("PGHOST")
@@ -36,6 +31,7 @@ func main() {
 	} else {
 		fmt.Println("Database connection successful.")
 	}
+
 	defer db.Close()
 
 	// Create a new Discord session using the provided bot token.
@@ -51,22 +47,22 @@ func main() {
 	dg.AddHandler(events.MemberJoin)
 	dg.AddHandler(events.MessageCreate)
 
-	// In this example, we only care about receiving message events.
+	// We only care about receiving message events.
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	// Open a websocket connection to Discord and begin listening.
-	err = dg.Open()
-	if err != nil {
+	if err := dg.Open(); err != nil {
 		fmt.Println("Error opening connection,", err)
 		return
 	}
 
-	// Wait here until CTRL-C or other term signal is received.
 	fmt.Println("Bot is now running. Press CTRL-C to exit.")
+
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
 
+	// Wait here until CTRL-C or other term signal is received.
+	<-sc
 	// Cleanly close down the Discord session.
 	dg.Close()
 }

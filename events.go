@@ -6,7 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func HandleReady(s *discordgo.Session, r *discordgo.Ready) {
+func HandleReady(s *discordgo.Session, _ *discordgo.Ready) {
 	log.Println("Logged in and ready to serve", len(s.State.Guilds), "servers")
 }
 
