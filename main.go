@@ -28,6 +28,7 @@ func main() {
 	//////////////////////////
 	cmdHandler := commands.NewCmdHandler()
 	cmdHandler.RegisterCommand(&commands.CmdHelp{})
+
 	//////////////////////////
 	// BOT SESSION CREATION //
 	//////////////////////////
@@ -38,6 +39,7 @@ func main() {
 	}
 
 	session.AddHandler(listeners.NewListenerReady().Handler)
+	session.AddHandler(listeners.NewListenerMsg().Handler)
 	session.AddHandler(listeners.NewListenerCmd(cmdHandler).Handler)
 
 	err = session.Open()
