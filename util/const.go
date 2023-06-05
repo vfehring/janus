@@ -10,7 +10,7 @@ const (
 		0x2000 | // MANAGE MESSAGES
 		0x4000 | // EMBED LINKS
 		0x8000 | // ATTACH FILES
-		0x10000 | // REACH MESSAGE HISTORY
+		0x10000 | // READ MESSAGE HISTORY
 		0x20000 | // MENTION @everyone
 		0x40000 | // USE EXTERNAL EMOJIS
 		0x4000000 | // CHANGE NICKNAMES
@@ -21,8 +21,7 @@ const (
 
 	ColorEmbedError   = 0xd32f2f
 	ColorEmbedDefault = 0xffc107
-	ColorEmbedUpdated = 0xcddc39
 
 	AutoNick = "Janus Verification"
-	StdMotd  = "keeping Discord safe"
+	StdMotd  = "closed beta version"
 )

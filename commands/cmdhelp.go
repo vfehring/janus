@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"vfehring/janus/util"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/vfehring/janus/src/util"
 )
 
 type CmdHelp struct {
@@ -18,12 +18,12 @@ func (c *CmdHelp) GetInvokes() []string {
 }
 
 func (c *CmdHelp) GetDescription() string {
-	return "dispaly list of command or get help for a specific command"
+	return "Display a list of commands or get help for a specific command"
 }
 
 func (c *CmdHelp) GetHelp() string {
-	return "`help` - display command list\n" +
-		"`help <command>` - display help of specific command"
+	return "`help` - Display command list\n" +
+		"`help <command>` - Display help of specific command"
 }
 
 func (c *CmdHelp) GetGroup() string {
@@ -73,9 +73,8 @@ func (c *CmdHelp) Exec(args *CommandArgs) error {
 		emb.Title = "Command Description"
 		emb.Fields = []*discordgo.MessageEmbedField{
 			&discordgo.MessageEmbedField{
-				Name:   "Invokes",
-				Value:  strings.Join(cmd.GetInvokes(), "\n"),
-				Inline: true,
+				Name:  "Invokes",
+				Value: strings.Join(cmd.GetInvokes(), "\n"),
 			},
 			&discordgo.MessageEmbedField{
 				Name:   "Group",
@@ -89,11 +88,11 @@ func (c *CmdHelp) Exec(args *CommandArgs) error {
 			},
 			&discordgo.MessageEmbedField{
 				Name:  "Description",
-				Value: util.EnsureNotEmpty(cmd.GetDescription(), "`no description`"),
+				Value: util.EnsureNotEmpty(cmd.GetDescription(), "`No description`"),
 			},
 			&discordgo.MessageEmbedField{
 				Name:  "Usage",
-				Value: util.EnsureNotEmpty(cmd.GetHelp(), "`no uage information`"),
+				Value: util.EnsureNotEmpty(cmd.GetHelp(), "`No usage information`"),
 			},
 		}
 	}

@@ -1,23 +1,16 @@
 package commands
 
-import (
-	"github.com/vfehring/janus/src/core"
-	"github.com/vfehring/janus/src/util"
-)
+import "vfehring/janus/util"
 
 type CmdHandler struct {
 	registeredCmds         map[string]Command
 	registeredCmdInstances []Command
-	db                     core.Database
-	config                 *core.Config
 }
 
-func NewCmdHandler(db core.Database, config *core.Config) *CmdHandler {
+func NewCmdHandler() *CmdHandler {
 	return &CmdHandler{
 		registeredCmds:         make(map[string]Command),
 		registeredCmdInstances: make([]Command, 0),
-		db:                     db,
-		config:                 config,
 	}
 }
 

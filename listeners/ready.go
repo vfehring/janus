@@ -1,26 +1,22 @@
 package listeners
 
 import (
-	"github.com/bwmarrin/discordgo"
+	"vfehring/janus/util"
 
-	"github.com/vfehring/janus/src/core"
-	"github.com/vfehring/janus/src/util"
+	"github.com/bwmarrin/discordgo"
 )
 
 type ListenerReady struct {
-	config *core.Config
 }
 
-func NewListenerReady(config *core.Config) *ListenerReady {
-	return &ListenerReady{
-		config: config,
-	}
+func NewListenerReady() *ListenerReady {
+	return &ListenerReady{}
 }
 
 func (l *ListenerReady) Handler(s *discordgo.Session, e *discordgo.Ready) {
 	util.Log.Infof("Logged in as %s#%s (%s) - Running on %d servers",
 		e.User.Username, e.User.Discriminator, e.User.ID, len(e.Guilds))
-	util.Log.Infof("Inviite link: https://discordapp.com/api/oauth2/authorize?client_id=%s&scope=bot&permissions=%d",
+	util.Log.Infof("Invite Link: https://discordapp.com/api/oauth2/authorize?client_id=%s&scope=bot&permissions=%d",
 		e.User.ID, util.InvitePermission)
 
 	s.UpdateGameStatus(0, util.StdMotd)
