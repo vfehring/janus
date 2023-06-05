@@ -2,6 +2,7 @@ package models
 
 type User struct {
 	ID           string `gorm:"primaryKey"`
+	Verified     int
 	Premium      bool
 	Gender       string
 	Rulebreaking int
