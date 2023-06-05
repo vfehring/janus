@@ -1,6 +1,7 @@
 package listeners
 
 import (
+	"vfehring/janus/models"
 	"vfehring/janus/util"
 
 	"github.com/bwmarrin/discordgo"
@@ -18,4 +19,10 @@ func (l *ListenerMsg) Handler(s *discordgo.Session, e *discordgo.MessageCreate) 
 		return
 	}
 	util.Log.Infof("New message sent")
+	usr := models.User{ID: e.Message.Author.ID}
+	userCreate := util.DB.Create(&usr)
+
+	if userCreate.Error != nil {
+		util.Log.Fatal("Couldn't create the user")
+	}
 }

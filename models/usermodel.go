@@ -1,7 +1,7 @@
 package models
 
 type User struct {
-	ID           int64 `gorm:"primaryKey"`
+	ID           string `gorm:"primaryKey"`
 	Premium      bool
 	Gender       string
 	Rulebreaking int
