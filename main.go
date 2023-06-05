@@ -5,6 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"vfehring/janus/commands"
 	"vfehring/janus/listeners"
 	"vfehring/janus/util"
 
@@ -19,6 +20,8 @@ func main() {
 	//////////////////////////
 	// COMMAND REGISTRATION //
 	//////////////////////////
+	cmdHandler := commands.NewCmdHandler()
+	cmdHandler.RegisterCommand(new(commands.CmdHelp))
 
 	//////////////////////////
 	// BOT SESSION CREATION //
@@ -30,6 +33,7 @@ func main() {
 	}
 
 	session.AddHandler(listeners.NewListenerReady().Handler)
+	session.AddHandler(listeners.NewListenerCmd(cmdHandler).Handler)
 
 	err = session.Open()
 	if err != nil {
