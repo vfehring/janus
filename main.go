@@ -12,6 +12,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+func init() {
+	util.ConnectDB()
+}
+
 func main() {
 	////////////////////
 	// DATABASE LOGIN //
