@@ -2,15 +2,10 @@ package util
 
 import (
 	"os"
-	"vfehring/janus/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-
-func init() {
-	DB.AutoMigrate(&models.User{})
-}
 
 var DB *gorm.DB
 

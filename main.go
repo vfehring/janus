@@ -7,6 +7,7 @@ import (
 
 	"vfehring/janus/commands"
 	"vfehring/janus/listeners"
+	"vfehring/janus/models"
 	"vfehring/janus/util"
 
 	"github.com/bwmarrin/discordgo"
@@ -14,6 +15,7 @@ import (
 
 func init() {
 	util.ConnectDB()
+	util.DB.AutoMigrate(&models.User{})
 }
 
 func main() {
