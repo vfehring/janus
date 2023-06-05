@@ -15,7 +15,7 @@ import (
 
 func init() {
 	util.ConnectDB()
-	util.DB.AutoMigrate(&models.User{})
+	util.DB.AutoMigrate(&models.User{}, &models.Guild{}, &models.Staff{})
 }
 
 func main() {
@@ -27,8 +27,7 @@ func main() {
 	// COMMAND REGISTRATION //
 	//////////////////////////
 	cmdHandler := commands.NewCmdHandler()
-	cmdHandler.RegisterCommand(new(commands.CmdHelp))
-
+	cmdHandler.RegisterCommand(&commands.CmdHelp{})
 	//////////////////////////
 	// BOT SESSION CREATION //
 	//////////////////////////
